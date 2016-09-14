@@ -14,7 +14,7 @@ TINYXML2_SOURCE= $(wildcard tinyxml2/*.cpp)
 SOURCES= $(wildcard sources/*.cpp)
 
 #Executable name
-EXECUTABLE_NAME=a.out
+EXECUTABLE_NAME=trabalhocg
 
 all: $(TINYXML2_SOURCE:.cpp=.o) $(SOURCES:.cpp=.o)
 	@echo Compiling program
@@ -29,7 +29,7 @@ run:
 	./$(EXECUTABLE_NAME)
 
 zip: clean
-	zip -r LeonardoPaulucio.zip main.cpp tinyxml2 sources
+	zip -r LeonardoPaulucio.zip main.cpp tinyxml2 sources Makefile
 
 clean:
 	@echo Cleaning object files

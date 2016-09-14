@@ -29,11 +29,15 @@
 *.exe
 *.out
 *.app
+trabalhocg
+a.out
+
+#Zip files
+*.zip
 
 #Directories
 especificacao
 .idea
-organizar
 
 #CMake Files
 CMakeLists.txt
