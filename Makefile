@@ -28,8 +28,10 @@ all: $(TINYXML2_SOURCE:.cpp=.o) $(SOURCES:.cpp=.o)
 run:
 	./$(EXECUTABLE_NAME)
 
-zip:
+zip: clean
 	zip -r LeonardoPaulucio.zip main.cpp tinyxml2 sources
 
 clean:
-	rm -f $(SOURCES:.cpp=.o) $(TINYXML2_SOURCE:.cpp=.o) $(EXECUTABLE)
+	@echo Cleaning object files
+	@rm -f $(SOURCES:.cpp=.o) $(TINYXML2_SOURCE:.cpp=.o) $(EXECUTABLE)
+	@echo Done

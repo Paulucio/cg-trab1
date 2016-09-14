@@ -3,6 +3,7 @@
 Quadrado::Quadrado()
 {
     length = 0;
+    xc = yc = 0;
     for(int i = 0; i < 3; i++)
         vertices[i][Z_AXIS] = 0;
 }
@@ -14,7 +15,7 @@ float Quadrado::getLength() const
 
 void Quadrado::setLength(float length)
 {
-    Quadrado::length = length;
+    this->length = length;
 }
 
 const float* Quadrado::getRGBColors() const
@@ -40,7 +41,7 @@ float Quadrado::getXc() const
 
 void Quadrado::setXc(float xc)
 {
-    Quadrado::xc = xc;
+    this->xc = xc;
 }
 
 float Quadrado::getYc() const
@@ -50,7 +51,7 @@ float Quadrado::getYc() const
 
 void Quadrado::setYc(float yc)
 {
-    Quadrado::yc = yc;
+    this->yc = yc;
 }
 
 const float* Quadrado::getVertices(int n) const
@@ -61,6 +62,13 @@ const float* Quadrado::getVertices(int n) const
 const float Quadrado::getVertices(int n, AXES a) const
 {
     return vertices[n][a];
+}
+
+void Quadrado::translate(float dx, float dy)
+{
+    this->xc += dx;
+    this->yc += dy;
+    updateVertices();
 }
 
 void Quadrado::updateVertices()

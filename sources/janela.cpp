@@ -14,7 +14,7 @@ int Janela::getWidth() const
 
 void Janela::setWidth(int width)
 {
-    Janela::width = width;
+    this->width = width;
 }
 
 int Janela::getHeight() const
@@ -24,7 +24,7 @@ int Janela::getHeight() const
 
 void Janela::setHeight(int height)
 {
-    Janela::height = height;
+    this->height = height;
 }
 
 void Janela::setBgColors(const float colors[3])
@@ -45,7 +45,7 @@ const std::string &Janela::getTitle() const
 
 void Janela::setTitle(const std::string &title)
 {
-    Janela::title = title;
+    this->title = title;
 }
 
 Janela::~Janela(){}

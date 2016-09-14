@@ -37,6 +37,8 @@ class Quadrado
 
         const float getVertices(int, AXES) const;
 
+        void translate(float, float);
+
         void updateVertices();
 
         bool insideSquare(float, float) const;

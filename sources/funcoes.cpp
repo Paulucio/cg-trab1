@@ -1,6 +1,6 @@
 #include "funcoes.h"
 
-void readXMLFile(const char *path, Janela &MainWindow, Quadrado &Square)
+void readXMLFile(const char *path, Janela& MainWindow, Quadrado& Square)
 {
     const char config_file_name[] = "config.xml";
 
@@ -73,4 +73,118 @@ void readXMLFile(const char *path, Janela &MainWindow, Quadrado &Square)
     //cout << "CorR " << colors[RED] << " CorG " << colors[GREEN] << " CorB " << colors[BLUE] << endl;
 
     return;
+}
+
+//OpenGL functions
+
+extern bool ALTERATION_STATE, INSIDE_SQUARE, DRAWN_FLAG;
+extern float mx_click, my_click;
+extern Janela MainWindow;
+extern Quadrado Square;
+
+void init(void)
+{
+    /*Selecting background color*/
+    //cout << " Janela "<< MainWindow.getBgColors(RED) << MainWindow.getBgColors(GREEN) << MainWindow.getBgColors(BLUE) << endl;
+    glClearColor(MainWindow.getBgColors(RED),MainWindow.getBgColors(GREEN),MainWindow.getBgColors(BLUE), 0.0);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0,MainWindow.getWidth(),0.0,MainWindow.getHeight(),-1.0,1.0);
+}
+
+void display(void)
+{
+    /*Cleaning pixels */
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    if(DRAWN_FLAG)
+    {
+        glColor3fv((GLfloat*)(Square.getRGBColors()));
+        glBegin(GL_POLYGON);
+        for(int i = 0; i < 4; i++)
+            glVertex3fv((GLfloat*)(Square.getVertices(i)));
+        glEnd();
+//        cout << Square.getVertices(3)[0] << endl;
+    }
+    glutSwapBuffers();
+}
+
+void idle(void)
+{
+    glutPostRedisplay();
+}
+
+void mouse(int key, int state, int x, int y)
+{
+//    int wx = MainWindow.getWidth();
+    int hy = MainWindow.getHeight();
+//    float x_norm, y_norm;
+    bool inside;
+
+    y = hy - y; //Adjusting Y-Axis
+
+//    x_norm = x/float(wx);
+//    y_norm = y/float(hy);
+
+    inside = Square.insideSquare(x,y); //Test if the mouse click was inside of the square
+
+//    cout << "x: " << x << " y: " << y << endl;
+//    cout << "xn: " << x_norm << " yn: " << y_norm << endl;
+//    cout << "Vertices: x0 -> " << Square.getVertices(0,X_AXIS) << " y -> " << Square.getVertices(0,Y_AXIS) << endl
+//         << "x1 -> " << Square.getVertices(1,X_AXIS) << " y -> " << Square.getVertices(1,Y_AXIS) << endl
+//         << "x2 -> " << Square.getVertices(2,X_AXIS) << " y -> " << Square.getVertices(2,Y_AXIS) << endl
+//         << "x3 -> " << Square.getVertices(3,X_AXIS) << " y -> " << Square.getVertices(3,Y_AXIS) << endl;
+
+    if (key == GLUT_LEFT_BUTTON && state == GLUT_DOWN && DRAWN_FLAG == false)
+    {
+        DRAWN_FLAG = true;
+        Square.setXc(x);
+        Square.setYc(y);
+        Square.updateVertices();
+        ALTERATION_STATE = true;
+    }
+
+    if(inside)
+    {
+        mx_click = x;
+        my_click = y;
+        INSIDE_SQUARE = true;
+    }
+    else INSIDE_SQUARE = false;
+
+    if (key == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+    {
+        if(inside)
+        {
+            DRAWN_FLAG = false;
+            ALTERATION_STATE = false;
+        }
+    }
+}
+
+void mouseMotion(int x, int y)
+{
+    if(ALTERATION_STATE && INSIDE_SQUARE)
+    {
+//        int wx = MainWindow.getWidth();
+        int hy = MainWindow.getHeight();
+//        float x_norm, y_norm;
+        float dx, dy;
+
+        y = hy - y; //Adjusting Y-Axis
+
+        dx = x - mx_click;
+        dy = y - my_click;
+
+        Square.translate(dx, dy);
+
+        //Updating mouse position
+        mx_click = x;
+        my_click = y;
+
+//        x_norm = x / float(wx);
+//        y_norm = y / float(hy);
+
+        //  cout << "Inside" << endl;
+    }
 }
