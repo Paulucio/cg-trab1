@@ -36,5 +36,5 @@ zip: clean
 
 clean:
 	@echo Cleaning object files
-	@rm -f $(SOURCES:.cpp=.o) $(TINYXML2_SOURCE:.cpp=.o) $(EXECUTABLE_NAME) *~
+	@rm -f *~ $(SOURCES:.cpp=.o) $(TINYXML2_SOURCE:.cpp=.o) $(EXECUTABLE_NAME)
 	@echo Done
