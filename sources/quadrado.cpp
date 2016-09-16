@@ -31,7 +31,7 @@ const float Quadrado::getRGBColors(COLOR_ID id) const
 void Quadrado::setRGBColors(const float colors[3])
 {
     for(int i = 0; i < 3; i++)
-        Quadrado::RGBColors[i] = colors[i];
+        RGBColors[i] = colors[i];
 }
 
 float Quadrado::getXc() const

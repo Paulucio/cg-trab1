@@ -1,5 +1,8 @@
 #MAKEFILE
 
+#Author
+AUTHOR_NAME=LeonardoSantosPaulucio
+
 #Compiler
 CC=g++
 
@@ -29,9 +32,9 @@ run:
 	./$(EXECUTABLE_NAME)
 
 zip: clean
-	zip -r LeonardoPaulucio.zip main.cpp tinyxml2 sources Makefile
+	zip -r $(AUTHOR_NAME).zip main.cpp tinyxml2 sources Makefile
 
 clean:
 	@echo Cleaning object files
-	@rm -f $(SOURCES:.cpp=.o) $(TINYXML2_SOURCE:.cpp=.o) $(EXECUTABLE)
+	@rm -f $(SOURCES:.cpp=.o) $(TINYXML2_SOURCE:.cpp=.o) $(EXECUTABLE_NAME) *~
 	@echo Done

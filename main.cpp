@@ -19,7 +19,6 @@ GLfloat mx_click, my_click;
 int main(int argc, char** argv)
 {
     readXMLFile(argv[1], MainWindow, Square);
-//    Square.setLength(Square.getLength()/MainWindow.getWidth());
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);

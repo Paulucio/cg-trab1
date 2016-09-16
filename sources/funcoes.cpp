@@ -116,24 +116,12 @@ void idle(void)
 
 void mouse(int key, int state, int x, int y)
 {
-//    int wx = MainWindow.getWidth();
     int hy = MainWindow.getHeight();
-//    float x_norm, y_norm;
     bool inside;
 
     y = hy - y; //Adjusting Y-Axis
 
-//    x_norm = x/float(wx);
-//    y_norm = y/float(hy);
-
     inside = Square.insideSquare(x,y); //Test if the mouse click was inside of the square
-
-//    cout << "x: " << x << " y: " << y << endl;
-//    cout << "xn: " << x_norm << " yn: " << y_norm << endl;
-//    cout << "Vertices: x0 -> " << Square.getVertices(0,X_AXIS) << " y -> " << Square.getVertices(0,Y_AXIS) << endl
-//         << "x1 -> " << Square.getVertices(1,X_AXIS) << " y -> " << Square.getVertices(1,Y_AXIS) << endl
-//         << "x2 -> " << Square.getVertices(2,X_AXIS) << " y -> " << Square.getVertices(2,Y_AXIS) << endl
-//         << "x3 -> " << Square.getVertices(3,X_AXIS) << " y -> " << Square.getVertices(3,Y_AXIS) << endl;
 
     if (key == GLUT_LEFT_BUTTON && state == GLUT_DOWN && DRAWN_FLAG == false)
     {
@@ -142,15 +130,14 @@ void mouse(int key, int state, int x, int y)
         Square.setYc(y);
         Square.updateVertices();
         ALTERATION_STATE = true;
-    }
 
-    if(inside)
-    {
-        mx_click = x;
-        my_click = y;
-        INSIDE_SQUARE = true;
-    }
-    else INSIDE_SQUARE = false;
+    } else if(inside && key == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            mx_click = x;
+            my_click = y;
+            INSIDE_SQUARE = true;
+        }
+        else INSIDE_SQUARE = false;
 
     if (key == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
     {
@@ -166,13 +153,12 @@ void mouseMotion(int x, int y)
 {
     if(ALTERATION_STATE && INSIDE_SQUARE)
     {
-//        int wx = MainWindow.getWidth();
         int hy = MainWindow.getHeight();
-//        float x_norm, y_norm;
         float dx, dy;
 
         y = hy - y; //Adjusting Y-Axis
 
+        //calculating difference between mouse position and square's center
         dx = x - mx_click;
         dy = y - my_click;
 
@@ -181,10 +167,5 @@ void mouseMotion(int x, int y)
         //Updating mouse position
         mx_click = x;
         my_click = y;
-
-//        x_norm = x / float(wx);
-//        y_norm = y / float(hy);
-
-        //  cout << "Inside" << endl;
     }
 }

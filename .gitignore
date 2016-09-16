@@ -36,7 +36,6 @@ a.out
 *.zip
 
 #Directories
-especificacao
 .idea
 
 #CMake Files

@@ -30,7 +30,7 @@ void Janela::setHeight(int height)
 void Janela::setBgColors(const float colors[3])
 {
     for(int i = 0; i < 3; i++)
-        Janela::bgColors[i] = colors[i];
+        bgColors[i] = colors[i];
 }
 
 const float Janela::getBgColors(COLOR_ID id) const
